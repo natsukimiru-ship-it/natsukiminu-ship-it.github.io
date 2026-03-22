@@ -1,0 +1,624 @@
+/* 
+  Aya's Wedding - LP Design System v2.1
+  Theme: Cinematic Collage, Overseas Style, Retro/Modern
+  Colors: Off-white (#F5EFE6), Black (#1A1A1A)
+  Fonts: Italiana (Main Title & Accent), Noto Sans JP
+*/
+
+:root {
+  --color-base: #F5EFE6;
+  --color-dark: #1A1A1A;
+  --color-accent: #D62828;
+  --font-main: "Italiana", serif;
+  --font-jp: 'New Tegomin', serif;
+  --transition-smooth: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-dark);
+  font-family: var(--font-jp);
+  overflow-x: hidden;
+  line-height: 1.4;
+}
+
+/* --- Layout --- */
+.fv {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: transparent;
+  z-index: 0;
+}
+/* --- Typography Repositioning --- */
+.main-title-container {
+  position: absolute;
+  top: 8vh; /* Lowered slightly for more air */
+  left: 6vw;
+  width: auto;
+  z-index: 50;
+  text-align: left;
+  pointer-events: none;
+  /* Removed float animation */
+}
+
+.sub-title-container {
+  position: absolute;
+  bottom: 8vh;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  text-align: center;
+  pointer-events: none;
+}
+
+.main-title {
+  font-family: var(--font-main);
+  font-size: clamp(1.8rem, 6vw, 4rem); 
+  line-height: 1.1;
+  color: #fff; /* White title for Video BG */
+  font-weight: 400; 
+  letter-spacing: 0.05em;
+  opacity: 1;
+  transform: none; 
+  text-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Improved readability */
+}
+
+.char {
+  display: inline-block;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.sub-title {
+  font-family: var(--font-main);
+  font-size: 1.2rem;
+  color: #fff; /* White subtitle */
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* --- Layered Film Strips (3D & Depth) --- */
+.film-diagonal-wrapper {
+  position: absolute;
+  width: 200%; 
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  pointer-events: none;
+  z-index: 10; 
+  transform: translate(-50%, -50%) rotate(0deg); /* Straight horizontal */
+}
+
+/* Single layer uses this */
+.layer-mid {
+  transform: translateZ(0px);
+}
+
+.fv-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1; /* Lowest layer of FV */
+  pointer-events: none;
+}
+
+/* --- Film Strip Styles - Semi-Transparent for Video --- */
+.film-strip {
+  display: flex;
+  gap: 40px;
+  background: rgba(26, 26, 26, 0.4); /* SEMI-TRANSPARENT to reveal video */
+  padding: 40px 20px;
+  box-shadow: 0 50px 100px rgba(0,0,0,0.3);
+  width: max-content; 
+}
+
+.strip-deep { animation: diagonalFlowDeep 80s linear infinite; }
+.strip-mid  { animation: diagonalFlowMid 60s linear infinite; }
+.strip-front { animation: diagonalFlowFront 40s linear infinite; }
+
+.film-frame {
+  flex: 0 0 180px; /* Narrower width */
+  height: 270px; /* Taller height (Portrait) */
+  background: #333;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  transition: transform 0.5s ease;
+}
+
+.film-frame::before,
+.film-frame::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  height: 25px;
+  background-image: radial-gradient(circle, var(--color-base) 40%, transparent 40%);
+  background-size: 15px 15px;
+  background-repeat: repeat-x;
+  z-index: 5;
+}
+
+.film-frame::before { top: 8px; }
+.film-frame::after { bottom: 8px; }
+
+.film-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%); /* Start Black & White */
+  transition: filter 0.6s cubic-bezier(0.22, 1, 0.36, 1); /* Faster snappier pop */
+}
+
+/* Class to be added randomly via JS */
+.film-frame img.color-active {
+  filter: grayscale(0%);
+}
+
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    url('https://grainy-gradients.vercel.app/noise.svg'),
+    radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.15) 100%);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 50;
+}
+
+@keyframes diagonalFlowDeep {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes diagonalFlowMid {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes diagonalFlowFront {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Floating Title Animation */
+/* Floating animation removed */
+
+/* --- Attendance Section --- */
+.attendance {
+  min-height: 70vh;
+  background-color: #F8F4ED; 
+  background-image: 
+    linear-gradient(#CB602D 1px, transparent 1px),
+    linear-gradient(90deg, #CB602D 1px, transparent 1px),
+    linear-gradient(#EAC149 1px, transparent 1px),
+    linear-gradient(90deg, #EAC149 1px, transparent 1px);
+  background-size: 60px 60px, 60px 60px, 30px 30px, 30px 30px; 
+  background-position: center center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px 200px 20px; /* Increased bottom padding for spacing */
+  position: relative;
+}
+
+/* 
+Previous pattern (Checkered) for easy revert:
+background-image: 
+    linear-gradient(45deg, #EAC149 25%, transparent 25%),
+    linear-gradient(-45deg, #EAC149 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #EAC149 75%),
+    linear-gradient(-45deg, transparent 75%, #EAC149 75%);
+background-size: 60px 60px;
+*/
+
+.attendance-title,
+.section-badge {
+  font-family: var(--font-main);
+  font-size: clamp(2rem, 8vw, 4rem);
+  text-align: center;
+  margin-bottom: 80px;
+  opacity: 1; /* More contrast */
+  color: var(--color-dark);
+}
+
+.message-body .section-badge {
+  color: #EEB5BC; /* Pink for teal section */
+  text-align: left;
+}
+
+.message-section .section-content {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.attendance-options {
+  display: flex;
+  gap: 120px;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Context for absolute hand */
+}
+
+.option-container {
+  position: relative;
+}
+
+.option-text {
+  font-family: var(--font-main);
+  font-size: clamp(3rem, 12vw, 8rem);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.yes-option {
+  position: relative;
+  display: inline-block;
+}
+
+.no-option {
+  opacity: 1; /* Fully visible initially */
+}
+
+.is-active .no-option {
+  animation: fadeOutNo 0.5s ease forwards 3.5s;
+}
+
+@keyframes fadeOutNo {
+  to { opacity: 0.3; }
+}
+
+/* Hand Pointer Animation (Center Aligned, pivot-shake) */
+.hand-pointer {
+  position: absolute;
+  width: 120px;
+  bottom: -150px; /* Moved down from -60px */
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  transform-origin: bottom center; /* Pivot from the bottom */
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.is-active .hand-pointer {
+  animation: handKachikachi 4.0s ease-in-out 0.5s forwards;
+}
+
+.hand-pointer img {
+  width: 100%;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+}
+
+@keyframes handKachikachi {
+  0% { transform: translateX(-50%) rotate(0deg) translateY(80px); opacity: 0; }
+  10% { transform: translateX(-50%) rotate(0deg) translateY(0); opacity: 1; }
+  /* Kachikachikachi (Fast shakes between NO and YES) */
+  15% { transform: translateX(-50%) rotate(25deg); } /* Right (NO) */
+  20% { transform: translateX(-50%) rotate(-25deg); } /* Left (YES) */
+  25% { transform: translateX(-50%) rotate(25deg); }
+  30% { transform: translateX(-50%) rotate(-25deg); }
+  35% { transform: translateX(-50%) rotate(30deg); }
+  40% { transform: translateX(-50%) rotate(-30deg); }
+  45% { transform: translateX(-50%) rotate(15deg); }
+  50% { transform: translateX(-50%) rotate(-15deg); }
+  /* Deep shake before decision */
+  60% { transform: translateX(-50%) rotate(35deg); }
+  75% { transform: translateX(-50%) rotate(-45deg); opacity: 1; } /* Pointing Left to YES */
+  100% { transform: translateX(-50%) rotate(-45deg) scale(1.1); opacity: 1; } /* Confident settlement */
+}
+
+/* --- Message Section --- */
+.message-section {
+  padding: 120px 20px;
+  background-color: var(--color-base);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-section {
+  padding: 0;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  /* Modern Parallax Trick for Mobile/PC: Clip-Path */
+  clip-path: inset(0 0 0 0);
+  min-height: 100vh;
+}
+
+/* This pseudo-element acts as the FIXED background */
+.message-section::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/message_01.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 1; /* Positive but below content wrapper */
+  pointer-events: none;
+  will-change: transform;
+}
+
+.message-content-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 0;
+  opacity: 0;
+  transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  min-height: 100vh;
+  position: relative;
+  z-index: 2; /* ABOVE the background ::before */
+}
+
+.message-section.is-active .message-content-wrapper {
+  opacity: 1;
+}
+
+.message-photo {
+  flex: 0 0 50%;
+  min-height: 100vh;
+  background: transparent; /* Acts as a window to the fixed section background */
+}
+
+/* Hide the <img> inside if it was there to avoid duplication */
+.message-photo img {
+  display: none;
+}
+
+.message-body {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10vw 8vw 10vw 5vw; /* Reduced left padding to touch closer */
+  font-family: var(--font-jp);
+  background-color: #3D676F; 
+  color: #EEB5BC; 
+  line-height: 2.2;
+  min-height: 100vh; 
+  transform: translateX(50px);
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+}
+
+.message-text p {
+  color: #EEB5BC; 
+  font-size: 1.0rem; /* Slightly reduced */
+  font-weight: 400;
+  margin-bottom: 25px;
+  letter-spacing: 0.05em;
+  word-break: break-all;
+}
+
+.to {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  letter-spacing: 0.1em;
+}
+
+.message-text p {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 30px;
+  letter-spacing: 0.05em;
+}
+
+/* --- Gallery Section (New Unified Layout) --- */
+.gallery-section {
+  padding: 120px 0;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0); /* Robust Fixed window */
+  background: #fdfdfd; 
+}
+
+/* Fixed Background for Gallery with Cream Overlay */
+.gallery-section::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Overlaying a semi-transparent cream color */
+  background: 
+    linear-gradient(rgba(248, 244, 237, 0.4), rgba(248, 244, 237, 0.4)),
+    url('../img/gallery_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 1; 
+  pointer-events: none;
+  will-change: transform;
+}
+
+.gallery-inner {
+  position: relative;
+  z-index: 10; /* Above background */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 80vh; Removed to follow content naturally */
+}
+
+.gallery-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px; /* Vertical spacing */
+  width: 100%;
+}
+
+.gallery-visual {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.gallery-text .text-sp { display: none; }
+
+.gallery-visual img {
+  max-width: 80%;
+  height: auto;
+  display: block;
+}
+
+.gallery-text .text-pc {
+  max-width: 50%; /* Text png usually smaller */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .gallery-section {
+    padding: 40px 0 100px; /* Reduced top, increased bottom space (100px) */
+  }
+  .gallery-visual img {
+    max-width: 100%; /* FULL SCREEN WIDTH */
+    width: 100%;
+  }
+  .gallery-text img {
+    max-width: 100%; /* Full screen width for text as well */
+  }
+  .gallery-text .text-pc { display: none; }
+  .gallery-text .text-sp { display: block; }
+  
+  .gallery-content {
+    gap: 0; /* Tighter gap for edge-to-edge feel */
+  }
+  .gallery-section::before {
+    background: 
+      linear-gradient(rgba(248, 244, 237, 0.4), rgba(248, 244, 237, 0.4)),
+      url('../img/gallery_bgsp.jpg'); /* Mobile-optimized background */
+    background-size: cover;
+    background-position: center;
+  }
+}
+@media (max-width: 768px) {
+  .message-section {
+    padding: 80px 15px;
+  }
+  .message-card {
+    padding: 0;
+  }
+  .message-content-wrapper {
+    flex-direction: column; 
+    opacity: 1; /* Force visible on mobile if needed */
+  }
+  .message-photo {
+    display: none; /* Removed the spacer window on mobile */
+  }
+  .message-body {
+    flex: none;
+    width: 100vw;
+    margin-left: -15px; /* Offset mobile padding to touch edges */
+    padding: 60px 25px;
+    line-height: 2;
+    min-height: auto;
+    transform: none; 
+    text-align: center;
+    background-color: #3d676f94; /* Semi-transparent teal to reveal the fixed background */
+    transition: none; 
+  }
+  .message-section.is-active .message-body {
+    transform: none;
+  }
+  .section-badge {
+    text-align: center;
+  }
+  .to {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+  }
+  .message-text p {
+    font-size: 1rem;
+  }
+}
+
+/* Red Circle Mark Animation (Triggered by .is-active) */
+.red-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 120%;
+  height: 120%;
+  border: 4px solid var(--color-accent);
+  border-radius: 50% 45% 55% 40% / 40% 55% 45% 50%;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.is-active .red-circle {
+  animation: circleIn 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) 4.0s forwards;
+}
+
+@keyframes circleIn {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 14vw;
+  }
+  .main-title-container {
+    top: 4vh;
+  }
+  .sub-title-container {
+    bottom: 5vh;
+  }
+  .film-diagonal-wrapper {
+    width: 200%; /* Match PC single strip scale */
+    transform: translate(-50%, -50%) rotate(0deg); /* Keep straight on mobile too */
+  }
+  
+  .film-frame {
+    flex: 0 0 120px; /* Adjusted to Portrait width */
+    height: 180px; /* Adjusted to Portrait height */
+  }
+  .attendance {
+    min-height: 50vh;
+    padding-top: 20px; 
+    padding-bottom: 120px;
+  }
+  .message-section {
+    margin-top: 0;
+  }
+  .option-text {
+    font-size: clamp(3rem, 15vw, 6rem);
+  }
+  .hand-pointer {
+    width: 80px;
+    bottom: -100px; /* Moved down proportionally on mobile */
+  }
+}
