@@ -39,30 +39,40 @@
                         class="char">g</span>
                 </h1>
 
-                <!-- 3. Triple Photo Slideshow -->
-                <div class="fv-triple-slideshow flow-item">
-                    <div class="slideshow-frame slot-1">
-                        <img src="img/fv-01.jpg" alt="AYANO">
-                        <img src="img/fv-04.jpg" alt="AYANO">
-                        <img src="img/fv-08.jpg" alt="AYANO">
+                <!-- 3. Slideshow Logic (Split for PC/Mobile Optimization) -->
+                <div class="fv-slideshow-container flow-item">
+                    <!-- PC VERSION: Triple Unique Windows (No Overlap) -->
+                    <div class="fv-triple-slideshow pc-only">
+                        <div class="slideshow-frame slot-1">
+                            <img src="img/fv-01.jpg" alt="AYANO">
+                            <img src="img/fv-04.jpg" alt="AYANO">
+                            <img src="img/fv-08.jpg" alt="AYANO">
+                        </div>
+                        <div class="slideshow-frame slot-2-pc">
+                            <img src="img/fv-02.jpg" alt="AYANO">
+                            <img src="img/fv-05.jpg" alt="AYANO">
+                            <img src="img/fv-09.jpg" alt="AYANO">
+                        </div>
+                        <div class="slideshow-frame slot-3">
+                            <img src="img/fv-03.jpg" alt="AYANO">
+                            <img src="img/fv-06.jpg" alt="AYANO">
+                            <img src="img/fv-10.jpg" alt="AYANO">
+                        </div>
                     </div>
-                    <!-- Slot 2: Full 10-Photo Rotation for Mobile & Center PC -->
-                    <!-- Slot 2: Full 9-Photo Rotation for Mobile & Center PC -->
-                    <div class="slideshow-frame slot-2">
-                        <img src="img/fv-01.jpg" alt="AYANO">
-                        <img src="img/fv-02.jpg" alt="AYANO">
-                        <img src="img/fv-03.jpg" alt="AYANO">
-                        <img src="img/fv-04.jpg" alt="AYANO">
-                        <img src="img/fv-05.jpg" alt="AYANO">
-                        <img src="img/fv-06.jpg" alt="AYANO">
-                        <img src="img/fv-08.jpg" alt="AYANO">
-                        <img src="img/fv-09.jpg" alt="AYANO">
-                        <img src="img/fv-10.jpg" alt="AYANO">
-                    </div>
-                    <div class="slideshow-frame slot-3">
-                        <img src="img/fv-03.jpg" alt="AYANO">
-                        <img src="img/fv-06.jpg" alt="AYANO">
-                        <img src="img/fv-10.jpg" alt="AYANO">
+
+                    <!-- MOBILE VERSION: Single Full-Sequence Window -->
+                    <div class="fv-triple-slideshow sp-only">
+                        <div class="slideshow-frame slot-mobile">
+                            <img src="img/fv-01.jpg" alt="AYANO">
+                            <img src="img/fv-02.jpg" alt="AYANO">
+                            <img src="img/fv-03.jpg" alt="AYANO">
+                            <img src="img/fv-04.jpg" alt="AYANO">
+                            <img src="img/fv-05.jpg" alt="AYANO">
+                            <img src="img/fv-06.jpg" alt="AYANO">
+                            <img src="img/fv-08.jpg" alt="AYANO">
+                            <img src="img/fv-09.jpg" alt="AYANO">
+                            <img src="img/fv-10.jpg" alt="AYANO">
+                        </div>
                     </div>
                 </div>
 
