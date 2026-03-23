@@ -22,6 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealSections.forEach(section => observer.observe(section));
 
+    // 2. Loading Screen Logic
+    const loader = document.getElementById('loading');
+    if (loader) {
+        // Hide loader after a brief elegant wait
+        setTimeout(() => {
+            loader.classList.add('is-hidden');
+            // Wait for the fade out transition, then start the FV animation sequence
+            setTimeout(() => {
+                document.body.classList.add('is-loaded');
+            }, 800);
+        }, 1200);
+    } else {
+        // Fallback
+        document.body.classList.add('is-loaded');
+    }
+
     // Optional: Log for confirmation
     console.log("Wedding LP Interactive Scripts Initialized.");
 });

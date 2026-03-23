@@ -5,14 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AYANO'S Story | Celebration</title>
-    <!-- Bodoni Moda (Main & Sub), Noto Sans JP -->
+    <!-- Cormorant, Great Vibes, New Tegomin -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=New+Tegomin&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Great+Vibes&family=New+Tegomin&display=block"
+        rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 
 <body>
+
+    <!-- Loading Screen -->
+    <div class="loader-overlay" id="loading">
+        <div class="loader-content">
+            <h1 class="loader-text">Ayano<br>Wedding</h1>
+            <div class="loader-ring"></div>
+        </div>
+    </div>
 
     <div class="grain-overlay"></div>
 
@@ -41,15 +51,38 @@
 
                 <!-- 4. Subtitle Message -->
                 <div class="sub-title-wrapper">
+                    <p class="to-best-friend">To My Best Friend</p>
                     <p class="sub-title">あやの　結婚　おめでとう！</p>
                 </div>
             </div>
+
+            <!-- ▼ スクロール①（縦ライン） -->
+            <div class="scroll-indicator">
+                <span class="scroll-text">Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+
+            <!-- ▼ スクロール③（横文字＋縦のウェーブ線）※いつでも戻せるようにコメントアウトして残しています -->
+            <!--
+            <div class="scroll-indicator-v3">
+                <span class="scroll-text-v3">Scroll</span>
+                <div class="scroll-wave">
+                    <svg viewBox="0 0 20 80" width="20" height="80">
+                        <path d="M 10 0 C 20 20, 0 40, 10 60 C 20 80, 0 100, 10 120"
+                              fill="transparent"
+                              stroke="var(--color-dark)"
+                              stroke-width="1.5"
+                              class="wave-path" />
+                    </svg>
+                </div>
+            </div>
+            -->
         </section>
 
         <!-- Attendance Section -->
         <section class="attendance">
             <div class="section-content">
-                <h2 class="attendance-title">Am I going?</h2>
+                <h2 class="attendance-title">Will I be joining?</h2>
                 <div class="attendance-options">
                     <div class="option-container yes-wrap">
                         <div class="option yes-option" id="optionYes">
@@ -72,7 +105,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Photo Slider Section -->
         <section class="photo-slider-section">
             <div class="slider-container">
