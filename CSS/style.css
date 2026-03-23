@@ -537,12 +537,12 @@ img { max-width: 100%; height: auto; display: block; }
   .gallery-section {
     background-image: linear-gradient(rgba(248, 244, 237, 0.4), rgba(248, 244, 237, 0.4)), url('../img/gallery_bgsp.jpg');
     background-size: cover;
-    background-attachment: scroll; /* Recommended for iOS */
+    background-attachment: fixed;
   }
 
   .message-section {
     background-size: cover;
-    background-attachment: scroll; /* Recommended for iOS */
+    background-attachment: fixed;
   }
 
   /* Slider Mobile Adjustments */
