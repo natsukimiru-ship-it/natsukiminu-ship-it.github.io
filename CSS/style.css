@@ -114,17 +114,16 @@ body.is-loaded .fv-header-icon {
   font-family: var(--font-fv);
   font-size: clamp(3rem, 11vw, 8rem);
   color: var(--color-dark);
-  line-height: 1.3; /* Increased to prevent clipping */
+  line-height: 1.4; /* Increased safely */
   text-align: center;
-  padding: 0.2em 0; /* Safe area for cursives */
+  padding: 0.1em 0;
 }
 
 .char {
   display: inline-block;
   opacity: 0;
   transform: translateY(15px);
-  padding: 0.1em; /* Gives sweeping loops room to render inside the block without clipping */
-  margin: -0.1em;
+  line-height: 1.4; /* Stronger defense against inline Safari clipping */
 }
 
 body.is-loaded .char {
@@ -714,16 +713,16 @@ body.is-loaded .scroll-indicator {
 @media (max-width: 768px) {
   .pc-only { display: none !important; }
   .sp-only { display: block !important; }
-  .fv { height: 80svh; min-height: 600px; }
-  .fv-master-stack { height: 80svh; min-height: 600px; gap: 2.5vh; padding: 20px 10px; }
+  .fv { height: 88svh; min-height: 650px; }
+  .fv-master-stack { height: 88svh; min-height: 650px; gap: 2vh; padding: 10px 10px 80px; }
   
   .br-sp { display: block; }
   .main-title { 
-    font-size: 24vw; /* Significantly larger on mobile */
-    line-height: 1.25; /* Loosened from 1.1 to prevent vertical clipping */
+    font-size: 22vw; /* Reduced slightly to prevent overflow while keeping impact */
+    line-height: 1.45; /* Absolute fix for Safari vertical clipping on Great Vibes */
     width: 100%; 
     letter-spacing: -0.01em; 
-    padding: 0.2em 0;
+    padding: 0.1em 0;
   }
 
   .fv-slideshow-container {
