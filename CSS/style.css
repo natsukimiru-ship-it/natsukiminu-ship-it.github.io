@@ -114,39 +114,31 @@ body.is-loaded .fv-header-icon {
   font-family: var(--font-fv);
   font-size: clamp(3rem, 11vw, 8rem);
   color: var(--color-dark);
-  line-height: 1.4; /* Increased safely */
+  line-height: 1.1; 
   text-align: center;
-  padding: 0.1em 0;
+  padding: 0.2em 0;
+  overflow: visible;
 }
 
-.char {
+.word {
   display: inline-block;
   opacity: 0;
-  transform: translateY(15px);
-  line-height: 1.4; /* Stronger defense against inline Safari clipping */
+  transform: translateY(20px);
+  padding: 0.15em 0.3em; /* Added left/right padding to prevent horizontal clipping of sweeping tails */
+  overflow: visible;
 }
 
-body.is-loaded .char {
-  animation: fvCharFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+body.is-loaded .word {
+  animation: fvWordFadeIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes fvCharFadeIn {
+@keyframes fvWordFadeIn {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Staggered Delay for 'Happy Wedding' starts after Logo (12 chars total) */
-body.is-loaded .char:nth-of-type(1)  { animation-delay: 1.0s; }
-body.is-loaded .char:nth-of-type(2)  { animation-delay: 1.1s; }
-body.is-loaded .char:nth-of-type(3)  { animation-delay: 1.2s; }
-body.is-loaded .char:nth-of-type(4)  { animation-delay: 1.3s; }
-body.is-loaded .char:nth-of-type(5)  { animation-delay: 1.4s; }
-body.is-loaded .char:nth-of-type(6)  { animation-delay: 1.6s; } /* Slight gap */
-body.is-loaded .char:nth-of-type(7)  { animation-delay: 1.7s; }
-body.is-loaded .char:nth-of-type(8)  { animation-delay: 1.8s; }
-body.is-loaded .char:nth-of-type(9)  { animation-delay: 1.9s; }
-body.is-loaded .char:nth-of-type(10) { animation-delay: 2.0s; }
-body.is-loaded .char:nth-of-type(11) { animation-delay: 2.1s; }
-body.is-loaded .char:nth-of-type(12) { animation-delay: 2.2s; }
+/* Staggered Delay for words */
+body.is-loaded .word:nth-of-type(1)  { animation-delay: 1.0s; } /* Happy */
+body.is-loaded .word:nth-of-type(2)  { animation-delay: 1.5s; } /* Wedding */
 
 .pc-only { display: flex; }
 .sp-only { display: none; }
@@ -718,11 +710,12 @@ body.is-loaded .scroll-indicator {
   
   .br-sp { display: block; }
   .main-title { 
-    font-size: 22vw; /* Reduced slightly to prevent overflow while keeping impact */
-    line-height: 1.45; /* Absolute fix for Safari vertical clipping on Great Vibes */
+    font-size: 19vw; /* Smaller to fit gracefully */
+    line-height: 1.1; /* Padding on .char handles the vertical clearance and line gaps */
     width: 100%; 
     letter-spacing: -0.01em; 
-    padding: 0.1em 0;
+    padding: 0.2em 0;
+    overflow: visible;
   }
 
   .fv-slideshow-container {
